@@ -37,7 +37,7 @@ namespace MobileAutomation
         [OneTimeTearDown]
         public void CleanUp()
         {
-            _driver.Close();
+            _driver.Dispose();
             appiumLocalService.Dispose();
         }
 

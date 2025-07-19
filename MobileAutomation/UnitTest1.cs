@@ -1,3 +1,4 @@
+using MobileAutomation.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
@@ -17,10 +18,11 @@ namespace MobileAutomation
         }
 
         [Test]
-        public void Test1()
+        public void ClickOSText()
         {
             AndroidDriver driver = getDriver();
-            driver.FindElement(By.XPath("//android.widget.TextView[@content-desc=\"OS\"]")).Click();
+            HomePage homePage = new HomePage(driver);
+            homePage.ClickOnListOption("OS");
             Assert.Pass();
         }
 
