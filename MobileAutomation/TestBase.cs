@@ -1,4 +1,7 @@
-﻿using OpenQA.Selenium.Appium;
+﻿using MobileAutomation.Utility;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.Service;
 using System;
@@ -15,6 +18,7 @@ namespace MobileAutomation
         private Uri _appiumServerUrl = new Uri("http://127.0.0.1:4723");
         AppiumServiceBuilder _appiumServiceBuilder;
         AppiumLocalService appiumLocalService;
+        
 
         [OneTimeSetUp]
         public void Setup()
@@ -29,14 +33,14 @@ namespace MobileAutomation
             appiumLocalService = _appiumServiceBuilder.WithIPAddress("127.0.0.1").UsingPort(4723).Build();
             appiumLocalService.Start();
 
-
             _driver = new AndroidDriver(_appiumServerUrl, appiumOptions);
-
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
         }
 
         [OneTimeTearDown]
         public void CleanUp()
-        {
+        {            
+
             _driver.Dispose();
             appiumLocalService.Dispose();
         }

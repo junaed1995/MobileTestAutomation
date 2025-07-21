@@ -1,7 +1,9 @@
-﻿using OpenQA.Selenium.Appium.Android;
-using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
 
 namespace MobileAutomation.PageObjects
 {
@@ -28,6 +30,7 @@ namespace MobileAutomation.PageObjects
 
         public void ClickOnListOption(string option)
         {
+            WebDriverWait webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             Console.WriteLine(_listElement.Count);
             foreach (var element in _listElement)
             {
@@ -35,6 +38,7 @@ namespace MobileAutomation.PageObjects
                 {
                     if (element.GetAttribute("content-desc").ToLower().Equals(option.ToLower()))
                     {
+                        webDriverWait.Until(ExpectedConditions.ElementIsVisible(By.ClassName(PageListClassName)));
                         element.Click();
                         break;
                     }
