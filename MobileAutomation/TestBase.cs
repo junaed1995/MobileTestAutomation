@@ -14,7 +14,7 @@ namespace MobileAutomation
 {
     public class TestBase
     {
-        private AndroidDriver _driver;
+        private static AndroidDriver _driver;
         private Uri _appiumServerUrl = new Uri("http://127.0.0.1:4723");
         AppiumServiceBuilder _appiumServiceBuilder;
         AppiumLocalService appiumLocalService;

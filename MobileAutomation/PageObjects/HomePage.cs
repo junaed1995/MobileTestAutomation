@@ -7,14 +7,13 @@ using SeleniumExtras.WaitHelpers;
 
 namespace MobileAutomation.PageObjects
 {
-    public class HomePage
-    {
-        protected AndroidDriver _driver;
+    public class HomePage : BasePage
+    {        
 
-        public HomePage(AndroidDriver driver)
+        public HomePage(AppiumDriver driver) : base(driver)
         {
-            _driver = driver;
-            PageFactory.InitElements(_driver, this);
+            //_driver = driver;
+            //PageFactory.InitElements(_driver, this);
             
         }
 
@@ -26,11 +25,10 @@ namespace MobileAutomation.PageObjects
         { 
           get; 
           set; 
-        }
+        }        
 
         public void ClickOnListOption(string option)
-        {
-            WebDriverWait webDriverWait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
+        {            
             Console.WriteLine(_listElement.Count);
             foreach (var element in _listElement)
             {
@@ -38,7 +36,7 @@ namespace MobileAutomation.PageObjects
                 {
                     if (element.GetAttribute("content-desc").ToLower().Equals(option.ToLower()))
                     {
-                        webDriverWait.Until(ExpectedConditions.ElementIsVisible(By.ClassName(PageListClassName)));
+                        WaitForElementToBeVisible(5,"className",PageListClassName);                       
                         element.Click();
                         break;
                     }
@@ -51,5 +49,6 @@ namespace MobileAutomation.PageObjects
                 }
             }
         }
+
     }
 }

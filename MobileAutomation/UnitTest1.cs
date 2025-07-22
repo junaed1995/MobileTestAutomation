@@ -15,17 +15,27 @@ namespace MobileAutomation
         [SetUp]
         public void TestSetup()
         {
-            testContext = TestContext.CurrentContext;
-            
+            testContext = TestContext.CurrentContext;            
         }
 
         [Test]
-        public void ClickOSText()
+        public void ClickOnSensorOption() {
+
+            var driver = getDriver();
+            HomePage homePage = new HomePage(driver);   
+            homePage.ClickOnListOption("OS");
+            OsOptionPage osOptionPage = new OsOptionPage(driver);
+            osOptionPage.TapOnSensorOptionWhenAvailable();
+        }
+
+        [Test]
+        public void NavigateAndOpenMorseCodeOption()
         {
-            var driver = getDriver();            
-            
+            var driver = getDriver();   
             HomePage homePage = new HomePage(driver);
             homePage.ClickOnListOption("OS");
+            OsOptionPage osOptionPage = new OsOptionPage(driver);
+            osOptionPage.TapOnMorseCodeOption();
         }
 
         [TearDown] 
