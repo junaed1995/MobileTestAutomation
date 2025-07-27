@@ -28,7 +28,7 @@ namespace MobileAutomation.PageObjects
         public void HighlightVisibleImageBasedOnIndex(AppiumDriver driver,int index,double swipeAmt,int scrollHowManyTimes = 3, SwipeDirection swipeDirection=SwipeDirection.Left)
         {
             if (scrollHowManyTimes > 0) {
-                advancedGestures.ScrollFromElement(_firstVisibleImage, driver, swipeAmt,scrollHowManyTimes, SwipeDirection.Left);                
+                advancedGestures.HorizontalScrollFromElement(_firstVisibleImage, driver, swipeAmt,scrollHowManyTimes, SwipeDirection.Left);                
             }
             _visibleImageList[index].Click();
         }

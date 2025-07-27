@@ -110,7 +110,7 @@ namespace MobileAutomation.Utility
             }
         }
 
-        public void ScrollFromElement(IWebElement element,AppiumDriver driver, double swipeAmount, int SwipeLimit = 3, SwipeDirection direction = SwipeDirection.Left)
+        public void HorizontalScrollFromElement(IWebElement element,AppiumDriver driver, double swipeAmount, int SwipeLimit = 3, SwipeDirection direction = SwipeDirection.Left)
         {
             Point elementLocation = element.Location;
             int elementScrollY = elementLocation.Y;
