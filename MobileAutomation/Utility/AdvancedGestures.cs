@@ -10,6 +10,10 @@ namespace MobileAutomation.Utility
     {
 
         AppiumDriver _driver;
+
+        public enum SwipeDirection{
+            Up, Down, Left, Right
+        }
         
         public AdvancedGestures(AppiumDriver driver)
         {
@@ -39,7 +43,7 @@ namespace MobileAutomation.Utility
                 .Release().Perform();
         }
 
-        public void SwipeToElement(AppiumDriver driver,IWebElement SwipeToWhichElement,int SwipeLimit=3)
+        public void SwipeToElement(AppiumDriver driver,IWebElement SwipeToWhichElement,int SwipeLimit =3)
         {
             for (int i = 0; i < SwipeLimit; i++)
             {
@@ -56,6 +60,61 @@ namespace MobileAutomation.Utility
 
                 SwipeDownToScrollUp(driver, 80.00, 50.00);
             }
+        }
+
+        public void SwipeLeftOrRight(AppiumDriver driver, double swipeAmount,int SwipeLimit = 3,SwipeDirection direction = SwipeDirection.Left,IWebElement StartElementScroll = null)
+        {
+            Size screenSize = driver.Manage().Window.Size;
+            int centerY = screenSize.Height / 10;
+            double SwipeInterval = 100;
+            
+
+            if (direction == SwipeDirection.Left)
+            {
+
+                int startX = (int)(screenSize.Width * 0.8);
+
+                int endX = (int)(screenSize.Width * (0.8 - swipeAmount));
+
+                
+
+                for(int i = 1;i<=SwipeLimit;i++)
+                {
+                    Actions actions = new Actions(driver);
+                    actions.MoveToLocation(startX, centerY)
+                        .ClickAndHold()
+                        .Pause(TimeSpan.FromMilliseconds(SwipeInterval))
+                        .MoveToLocation(endX, centerY)
+                        .Release()
+                        .Perform();
+                }
+            }
+            else
+            {
+                int startX = (int)(screenSize.Width * 0.2);
+
+                int endX = (int)(screenSize.Width * (0.2 + swipeAmount));
+
+                
+
+                for (int i = 1; i <= SwipeLimit; i++)
+                {
+                    Actions actions = new Actions(driver);
+                    actions.MoveToLocation(startX, centerY)
+                        .ClickAndHold()
+                        .Pause(TimeSpan.FromMilliseconds(SwipeInterval))
+                        .MoveToLocation(endX, centerY)
+                        .Release()
+                        .Perform();
+                }
+            }
+        }
+
+        public void ScrollFromElement(IWebElement element,AppiumDriver driver, double swipeAmount, int SwipeLimit = 3, SwipeDirection direction = SwipeDirection.Left)
+        {
+            Point elementLocation = element.Location;
+            int elementScrollY = elementLocation.Y;
+            SwipeLeftOrRight(driver,swipeAmount,SwipeLimit, direction, element);
         }
     }
 }

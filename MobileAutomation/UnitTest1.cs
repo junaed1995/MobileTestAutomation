@@ -64,6 +64,22 @@ namespace MobileAutomation
             viewsPage.ClickOnSearchView();
         }
 
+        [Test]
+        public void ClickOpenGalleryView()
+        {
+            var driver = getDriver();
+            HomePage homePage = new HomePage(driver);
+            homePage.ClickOnListOption("Views");
+            ViewsPage viewsPage = new ViewsPage(driver);
+            viewsPage.ClickOnGallery();
+
+            GalleryOptionsPage galleryOptions = new GalleryOptionsPage(driver);
+            galleryOptions.OpenGalleryType();
+
+            PhotosPage photosPage = new PhotosPage(driver);
+            photosPage.HighlightVisibleImageBasedOnIndex(driver,2, 0.4, 2);
+        }
+
         [TearDown] 
         public void TestTearDown() 
         {
