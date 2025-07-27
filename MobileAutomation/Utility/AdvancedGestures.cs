@@ -62,10 +62,15 @@ namespace MobileAutomation.Utility
             }
         }
 
-        public void SwipeLeftOrRight(AppiumDriver driver, double swipeAmount,int SwipeLimit = 3,SwipeDirection direction = SwipeDirection.Left,IWebElement StartElementScroll = null)
+        public void SwipeLeftOrRight(AppiumDriver driver, double swipeAmount, int SwipeLimit = 3, SwipeDirection direction = SwipeDirection.Left, int ElementYPos = 0)
         {
             Size screenSize = driver.Manage().Window.Size;
-            int centerY = screenSize.Height / 10;
+            int centerY = 0;
+            if (ElementYPos == 0)
+                centerY = screenSize.Height / 2;
+            else
+                centerY = ElementYPos;
+
             double SwipeInterval = 100;
             
 
@@ -114,7 +119,7 @@ namespace MobileAutomation.Utility
         {
             Point elementLocation = element.Location;
             int elementScrollY = elementLocation.Y;
-            SwipeLeftOrRight(driver,swipeAmount,SwipeLimit, direction, element);
+            SwipeLeftOrRight(driver,swipeAmount,SwipeLimit, direction, elementScrollY);
         }
     }
 }
